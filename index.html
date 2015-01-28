@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MakeYourOwnWar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+	<!--script src="js/less-1.3.3.min.js"></script-->
+	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+	
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" href="img/favicon.png">
+  
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+	<script type="text/javascript"> $('#myModal').modal(options) </script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://getbootstrap.com/examples/navbar-fixed-top/#">MakeYourOwnWar</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-right">
+
+            <li><a href="#" class="btn-success" data-id="page-top" data-toggle="modal" data-target="#myModal"><font color="white">วิธีใช้</font></a></li>
+
+          </ul>
+
+
+        </div>
+      </div>
+    </nav>
+
+
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="page-header">
+				<center>
+						<h1>
+							<br>
+							สร้างสารท้ารบในแบบของคุณ
+						</h1>
+				</center>
+			</div>
+		</div>
+	</div>
+	<div class="row clearfix">
+	<br>
+
+
+		<div class="col-md-6 column">
+			<center>
+				<canvas id="mycanvas"></canvas>
+				<p id="textNameZone2">
+					FirstName LastName
+				</p>
+				<p>
+					<a id="download" href="#" type="button" class="btn btn-success btn-lg" onclick="printClick()">Download PNG</a>
+				</p> 
+			</center>
+		</div>
+
+		<div class="col-md-6 column">
+
+				<div class="form-group">
+				    <!-- <label for="gg">Text 1</label> -->
+				    <p>
+				    	<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Input Something...">
+				    </p>
+				    <p>
+				    		<label for="gg">X :</label>
+					    	<input type="range" min="0" max="100" value="50" style="width: 100px;" id="fader">
+					    	<label for="gg">&nbsp;&nbsp;</label>
+					    	<label for="gg">Y :</label>
+					    	<input type="range" min="0" max="100" value="50" style="width: 100px;" id="fader">
+
+
+				    		<!-- <input type="range" min="0" max="100" value="50" style="width: 30%;" id="fader"> -->
+				    		<!-- onchange="outputUpdate(value)"> -->
+				    
+				    </p>
+				</div>
+		</div>
+
+	</div>
+</div>
+
+<script>
+function printClick () {
+	console.log("click button");
+}
+</script>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Ranking...</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        <a href="#" type="button" class="btn btn-success" data-dismiss="modal">Close</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+
+<script>
+	var canvas = document.getElementById('mycanvas'),
+	    ctx = canvas.getContext('2d');
+
+	function doCanvas() {
+	    /* draw something */
+	    ctx.fillStyle = '#f90';
+	    ctx.fillRect(0, 0, canvas.width, canvas.height);
+	    ctx.fillStyle = '#fff';
+	    ctx.font = '60px sans-serif';
+	    ctx.fillText('Copy', 10, canvas.height / 2 - 15);
+	    ctx.font = '26px sans-serif';
+	    ctx.fillText('MyCanvas', 15, canvas.height / 2 + 35);
+	}
+
+	function downloadCanvas(link, canvasId, filename) {
+	    link.href = document.getElementById(canvasId).toDataURL();
+	    link.download = filename;
+	}
+
+	document.getElementById('download').addEventListener('click', function() {
+	    downloadCanvas(this, 'mycanvas', 'test.png');
+	}, false);
+
+	doCanvas();
+</script>
+</html>

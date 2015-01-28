@@ -90,34 +90,12 @@
 			</center>
 		</div>
 
-		<div class="col-md-6 column">
-
-				<div class="form-group">
-				    <!-- <label for="gg">Text 1</label> -->
-				    <p>
-				    	<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Input Something...">
-				    </p>
-				    <p>
-				    		<label for="gg">X :</label>
-					    	<input type="range" min="0" max="100" value="45" style="width: 45px;" id="fader">
-					    	<label for="gg">&nbsp;&nbsp;</label>
-					    	<label for="gg">Y :</label>
-					    	<input type="range" min="0" max="100" value="45" style="width: 45px;" id="fader">
-					    	<label for="gg">&nbsp;&nbsp;</label>
-					    	<label for="gg">A :</label>
-					    	<input type="range" min="0" max="100" value="45" style="width: 45px;" id="fader">
-					    	<label for="gg">&nbsp;&nbsp;</label>
-					    	<label for="gg">S :</label>
-					    	<input type="range" min="0" max="100" value="45" style="width: 45px;" id="fader">
-					    	<label for="gg">&nbsp;&nbsp;</label>
-					    	<input id="background-color" type="color" value="#40c744" style="width: 30px;"/>
+		<div id="SuperPosition" class="col-md-6 column">
 
 
-				    		<!-- <input type="range" min="0" max="100" value="50" style="width: 30%;" id="fader"> -->
-				    		<!-- onchange="outputUpdate(value)"> -->
-				    
-				    </p>
-				</div>
+
+
+
 		</div>
 
 	</div>
@@ -127,8 +105,42 @@
 function printClick () {
 	console.log("click button");
 }
+
 </script>
 
+
+<script>
+var i = 1;
+function addTextForm () {
+xString = "<div id=\"SuperText"+i+"\" class=\"form-group\">"
++    "<p id=\"placeText"+i+"\">"
++    	"<input id=\"inputText"+i+"\" type=\"email\" class=\"form-control\" placeholder=\"Input Something...\">"
++    "</p>"
++    "<p id=\"placeStyle"+i+"\">"
++    		"<label>X :</label>"
++	    	"<input id=\"inputX"+i+"\" type=\"range\" min=\"0\" max=\"100\" value=\"45\" style=\"width: 45px;\" id=\"fader\" onchange=\"valueUpdate()\">"
++	    	"<label>&nbsp;&nbsp;</label>"
++	    	"<label>Y :</label>"
++	    	"<input id=\"inputY"+i+"\" type=\"range\" min=\"0\" max=\"100\" value=\"45\" style=\"width: 45px;\" id=\"fader\" onchange=\"valueUpdate()\">"
++	    	"<label>&nbsp;&nbsp;</label>"
++	    	"<label>A :</label>"
++	    	"<input id=\"inputA"+i+"\" type=\"range\" min=\"0\" max=\"100\" value=\"45\" style=\"width: 45px;\" id=\"fader\" onchange=\"valueUpdate()\">"
++	    	"<label>&nbsp;&nbsp;</label>"
++	    	"<label>S :</label>"
++	    	"<input id=\"inputS"+i+"\" type=\"range\" min=\"0\" max=\"100\" value=\"45\" style=\"width: 45px;\" id=\"fader\" onchange=\"valueUpdate()\">"
++	    	"<label>&nbsp;&nbsp;</label>"
++	    	"<input id=\"inputColor"+i+"\" type=\"color\" value=\"#40c744\" style=\"width: 30px;\" onchange=\"outputUpdate()\"/>"
++    "</p>"
++   "</div>"
+
+var pos = document.getElementById('SuperPosition');
+	pos.innerHTML += xString;
+	i++;
+}
+
+addTextForm();
+addTextForm();
+</script>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

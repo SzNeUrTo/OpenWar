@@ -117,53 +117,68 @@ function printClick () {
 
 
 <script>
-	var i = 0;
+	var n = 0;
 	function addTextForm () {
-	i++;
-	xString = "<div id=\"SuperText"+i+"\" class=\"form-group\">"
-	+    "<p id=\"placeText"+i+"\">"
-	+    	"<input id=\"inputText"+i+"\" type=\"email\" class=\"form-control\" placeholder=\"Input Something...\" onkeyup=\"valueUpdate(this.id)\">"
-	+    "</p>"
-	+    "<p id=\"placeStyle"+i+"\">"
-	+    		"<label>X :</label>"
-	+	    	"<input id=\"inputX"+i+"\" type=\"range\" min=\"0\" max=\"100\" value=\"45\" style=\"width: 45px;\" id=\"fader\" oninput=\"valueUpdate(this.id)\">"
-	+	    	"<label>&nbsp;&nbsp;</label>"
-	+	    	"<label>Y :</label>"
-	+	    	"<input id=\"inputY"+i+"\" type=\"range\" min=\"0\" max=\"100\" value=\"45\" style=\"width: 45px;\" id=\"fader\" oninput=\"valueUpdate(this.id)\">"
-	+	    	"<label>&nbsp;&nbsp;</label>"
-	+	    	"<label>A :</label>"
-	+	    	"<input id=\"inputA"+i+"\" type=\"range\" min=\"0\" max=\"100\" value=\"45\" style=\"width: 45px;\" id=\"fader\" oninput=\"valueUpdate(this.id)\">"
-	+	    	"<label>&nbsp;&nbsp;</label>"
-	+	    	"<label>S :</label>"
-	+	    	"<input id=\"inputS"+i+"\" type=\"range\" min=\"0\" max=\"100\" value=\"45\" style=\"width: 45px;\" id=\"fader\" oninput=\"valueUpdate(this.id)\">"
-	+	    	"<label>&nbsp;&nbsp;</label>"
-	+	    	"<input id=\"inputColor"+i+"\" type=\"color\" value=\"#40c744\" style=\"width: 30px;\" oninput=\"valueUpdate(this.id)\"/>"
-	+    "</p>"
-	+   "</div>"
+		var backupData = [];
+		for (var i = 1; i <= n; i++) {
+			var data = [];
+			var t = document.getElementById('inputText'+i).value;
+			var x = document.getElementById('inputX'+i).value;
+			var y = document.getElementById('inputY'+i).value;
+			var a = document.getElementById('inputA'+i).value;
+			var s = document.getElementById('inputS'+i).value;
+			var c = document.getElementById('inputColor'+i).value;
+			backupData.push([t,x,y,a,s,c]);
+		}
+		n++;
+		xString = "<div id=\"SuperText"+n+"\" class=\"form-group\">"
+		+    "<p id=\"placeText"+n+"\">"
+		+    	"<input id=\"inputText"+n+"\" type=\"email\" class=\"form-control\" placeholder=\"Input Something...\" onkeyup=\"valueUpdate(this.id)\">"
+		+    "</p>"
+		+    "<p id=\"placeStyle"+n+"\">"
+		+    		"<label>X :</label>"
+		+	    	"<input id=\"inputX"+n+"\" type=\"range\" min=\"0\" max=\"100\" value=\"45\" style=\"width: 45px;\" id=\"fader\" oninput=\"valueUpdate(this.id)\">"
+		+	    	"<label>&nbsp;&nbsp;</label>"
+		+	    	"<label>Y :</label>"
+		+	    	"<input id=\"inputY"+n+"\" type=\"range\" min=\"0\" max=\"100\" value=\"45\" style=\"width: 45px;\" id=\"fader\" oninput=\"valueUpdate(this.id)\">"
+		+	    	"<label>&nbsp;&nbsp;</label>"
+		+	    	"<label>A :</label>"
+		+	    	"<input id=\"inputA"+n+"\" type=\"range\" min=\"0\" max=\"100\" value=\"45\" style=\"width: 45px;\" id=\"fader\" oninput=\"valueUpdate(this.id)\">"
+		+	    	"<label>&nbsp;&nbsp;</label>"
+		+	    	"<label>S :</label>"
+		+	    	"<input id=\"inputS"+n+"\" type=\"range\" min=\"0\" max=\"100\" value=\"45\" style=\"width: 45px;\" id=\"fader\" oninput=\"valueUpdate(this.id)\">"
+		+	    	"<label>&nbsp;&nbsp;</label>"
+		+	    	"<input id=\"inputColor"+n+"\" type=\"color\" value=\"#40c744\" style=\"width: 30px;\" oninput=\"valueUpdate(this.id)\"/>"
+		+    "</p>"
+		+   "</div>"
 
-	var pos = document.getElementById('SuperPosition');
+		var pos = document.getElementById('SuperPosition');
 		pos.innerHTML += xString;
+		for (var i = 1; i < n; i++) {
+			try {
+				var index = i - 1;
+				document.getElementById('inputText'+i).value = backupData[index][0];
+				document.getElementById('inputX'+i) = backupData[index][1];
+				document.getElementById('inputY'+i) = backupData[index][2];
+				document.getElementById('inputA'+i) = backupData[index][3];
+				document.getElementById('inputS'+i) = backupData[index][4];
+				document.getElementById('inputColor'+i) = backupData[index][5];
+			}
+			catch (err) {
+				
+			}
+		}
 	}
 
 	addTextForm();
 	addTextForm();
 </script>
-<script>
-function valueUpdate (id) {
-	console.log('gg : ' + id);
-	
-	// renderCanvas();
-}
 
-function renderCanvas () {
-
-}
-</script>
 <script>
 function delTextForm() {
-	if (i > 1) {
-		var x = document.getElementById('SuperText'+i);
-		i--;
+	if (n > 1) {
+		var x = document.getElementById('SuperText'+n);
+		n--;
 		x.parentNode.removeChild(x);
 	}
 }
@@ -188,19 +203,75 @@ function delTextForm() {
 </body>
 <script>
 var self = this;
-var image;
-	var canvas = document.getElementById("mycanvas"),
-	context = canvas.getContext("2d");
-
+var image = document.createElement("img");
+var canvas = document.getElementById("mycanvas"),
+ct = canvas.getContext("2d");
+image.src = 'normal.png'
 function clearObjCanvas () {
-	context.clearRect(0, 0, canvas.width, canvas.height);
+	ct.clearRect(0, 0, canvas.width, canvas.height);
 }
 function drawImageCanvas() {
 	clearObjCanvas();
-	context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+	ct.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+}
+
+function render () {
+	
 }
 </script>
+<script>
+var textData = [];
+function valueUpdate (id) {
+	textData = [];
+	for (var i = 1; i <= n; i++) {
+		var data = [];
+		var t = document.getElementById('inputText'+i).value;
+		var x = document.getElementById('inputX'+i).value;
+		var y = document.getElementById('inputY'+i).value;
+		var a = document.getElementById('inputA'+i).value;
+		var s = document.getElementById('inputS'+i).value;
+		var c = document.getElementById('inputColor'+i).value;
+		textData.push([t,x,y,a,s,c]);
 
+	}
+	renderCanvas();
+}
+
+
+	// function doCanvas() {
+	//     /* draw something */
+	//     ctx.fillStyle = '#f90';
+	    
+	//     ctx.fillRect(0, 0, canvas.width, canvas.height);
+	    // ctx.fillStyle = '#fff';
+	    // ctx.font = '60px sans-serif';
+	    // ctx.fillText('Drag', 10, canvas.height / 2 - 15);
+	//     ctx.font = '26px sans-serif';
+	//     ctx.fillText('Image Here', 15, canvas.height / 2 + 35);
+	// }
+
+function renderCanvas () {
+	drawImageCanvas();
+	for (var i = 1; i <= n; i++) {
+		var index = i - 1;
+		var text = textData[index][0];
+		var xVal = textData[index][1];
+		var yVal = textData[index][2];
+		var angleVal = textData[index][3];
+		var sizeVal = textData[index][4];
+		var colorVal = textData[index][5];
+
+		// ct.fillStyle = '#fff';
+		// ct.fillStyle = col
+	    ct.font = '60px sans-serif';
+	    // ct.rotate(45*Math.PI/180);
+	    ct.fillText(text, canvas.width / 2, canvas.height / 2);
+	    // ct.rotate(-45*Math.PI/180);
+
+
+	}
+}
+</script>
 
 
 <script>
@@ -243,7 +314,8 @@ function drawImageCanvas() {
 
 			console.log('Image for loading');
 			self.image = img;
-			drawImageCanvas();
+			// drawImageCanvas();
+			renderCanvas();
 			// context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
 		}, false);
 		
@@ -304,7 +376,7 @@ function drawImageCanvas() {
 
 <script>
 	var canvas = document.getElementById('mycanvas'),
-	    ctx = canvas.getContext('2d');
+	ctx = canvas.getContext('2d');
 	 canvas.height = 500;
 	 canvas.width = 500;
 

@@ -82,7 +82,7 @@
 			<center>
 				<canvas id="mycanvas"></canvas>
 				<p>
-					<a id="download" href="#" type="button" class="btn btn-success btn-lg" onclick="printClick()">Download PNG</a>
+				<a id="download" href="#" type="button" class="btn btn-success btn-lg" onclick="printClick()" onclick="downloadImage()">Download PNG</a>
 				</p> 
 			</center>
 		</div>
@@ -262,10 +262,17 @@ function renderCanvas () {
 		var colorVal = textData[index][5];
 
 		// ct.fillStyle = '#fff';
-		// ct.fillStyle = col
-	    ct.font = '60px sans-serif';
+		ct.fillStyle = colorVal;
+	    // ct.font = '120px sans-serif';
+	    // console.log(sizeVal + 20);
+	    ct.font = (parseInt(sizeVal) / 100.0 * (180 - 20) + 20)+'px sans-serif';
+	    ct.textAlign="center";
+	    // console.log("xVal : " + xVal);
 	    // ct.rotate(45*Math.PI/180);
-	    ct.fillText(text, canvas.width / 2, canvas.height / 2);
+	    var xPos = canvas.width * xVal / 100;
+	    var yPos = canvas.height * (100 - yVal) / 100;
+	    
+	    ct.fillText(text, xPos, yPos);
 	    // ct.rotate(-45*Math.PI/180);
 
 
